@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 /** 
   All of the routes for the Material Dashboard 2 React are added here,
   You can add a new route, customize the routes and delete the routes here.
@@ -38,6 +23,9 @@ Coded by www.creative-tim.com
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
+import Domain from "layouts/domain";
+import Users from "layouts/userList";
+import ServerList from "layouts/serverList";
 import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
 import Notifications from "layouts/notifications";
@@ -56,6 +44,31 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <Dashboard />,
+  },
+
+  {
+    type: "collapse",
+    name: "User List",
+    key: "domainListTable",
+    icon: <Icon fontSize="small">people</Icon>,
+    route: "/user-list",
+    component: <Users />,
+  },
+  {
+    type: "collapse",
+    name: "Domain List",
+    key: "domainListTable",
+    icon: <Icon fontSize="small">domain</Icon>,
+    route: "/domain-list",
+    component: <Domain />,
+  },
+  {
+    type: "collapse",
+    name: "Server List",
+    key: "serverListTable",
+    icon: <Icon fontSize="small">storage</Icon>,
+    route: "/server-list",
+    component: <ServerList />,
   },
   {
     type: "collapse",

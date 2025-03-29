@@ -28,6 +28,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Icon from "@mui/material/Icon";
 import Autocomplete from "@mui/material/Autocomplete";
+import { useMediaQuery } from "@mui/material";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -48,6 +49,8 @@ function DataTable({
   isSorted,
   noEndBorder,
 }) {
+  const isSmallScreen = useMediaQuery("(max-width:568px)");
+
   const defaultValue = entriesPerPage.defaultValue ? entriesPerPage.defaultValue : 10;
   const entries = entriesPerPage.entries
     ? entriesPerPage.entries.map((el) => el.toString())
@@ -86,27 +89,47 @@ function DataTable({
   // Set the entries per page value based on the select value
   const setEntriesPerPage = (value) => setPageSize(value);
 
+  // Fixed: Safe navigation between pages even when page has fewer entries
+  const safeGotoPage = (pageNum) => {
+    // Ensure we're within bounds
+    if (pageNum >= 0 && pageNum < pageOptions.length) {
+      gotoPage(pageNum);
+    }
+  };
+
   // Render the paginations
   const renderPagination = pageOptions.map((option) => (
     <MDPagination
       item
       key={option}
-      onClick={() => gotoPage(Number(option))}
+      onClick={() => safeGotoPage(Number(option))}
       active={pageIndex === option}
     >
       {option + 1}
     </MDPagination>
   ));
 
-  // Handler for the input to set the pagination index
-  const handleInputPagination = ({ target: { value } }) =>
-    value > pageOptions.length || value < 0 ? gotoPage(0) : gotoPage(Number(value));
+  // Fixed: Handler for the input to set the pagination index
+  const handleInputPagination = ({ target: { value } }) => {
+    const pageNum = Number(value) - 1;
+    if (pageNum >= 0 && pageNum < pageOptions.length) {
+      safeGotoPage(pageNum);
+    } else {
+      // If out of bounds, go to first page
+      safeGotoPage(0);
+    }
+  };
 
   // Customized page options starting from 1
   const customizedPageOptions = pageOptions.map((option) => option + 1);
 
-  // Setting value for the pagination input
-  const handleInputPaginationValue = ({ target: value }) => gotoPage(Number(value.value - 1));
+  // Fixed: Setting value for the pagination input with validation
+  const handleInputPaginationValue = ({ target: value }) => {
+    const pageNum = Number(value.value) - 1;
+    if (pageNum >= 0 && pageNum < pageOptions.length) {
+      safeGotoPage(pageNum);
+    }
+  };
 
   // Search input value state
   const [search, setSearch] = useState(globalFilter);
@@ -134,21 +157,30 @@ function DataTable({
   // Setting the entries starting point
   const entriesStart = pageIndex === 0 ? pageIndex + 1 : pageIndex * pageSize + 1;
 
-  // Setting the entries ending point
+  // Fixed: Calculate entries end correctly for the last page
   let entriesEnd;
-
-  if (pageIndex === 0) {
-    entriesEnd = pageSize;
-  } else if (pageIndex === pageOptions.length - 1) {
-    entriesEnd = rows.length;
+  if (pageIndex === pageOptions.length - 1) {
+    // On last page, show actual number of records
+    entriesEnd = entriesStart + page.length - 1;
   } else {
-    entriesEnd = pageSize * (pageIndex + 1);
+    // On other pages, show standard calculation
+    entriesEnd = entriesStart + pageSize - 1;
   }
+
+  // Make sure entriesEnd doesn't exceed total rows
+  entriesEnd = Math.min(entriesEnd, rows.length);
 
   return (
     <TableContainer sx={{ boxShadow: "none" }}>
       {entriesPerPage || canSearch ? (
-        <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+        <MDBox
+          display="flex"
+          flexDirection={isSmallScreen ? "column" : "row"}
+          justifyContent="space-between"
+          alignItems={isSmallScreen ? "start" : "center"}
+          gap="10px"
+          p={3}
+        >
           {entriesPerPage && (
             <MDBox display="flex" alignItems="center">
               <Autocomplete
@@ -157,6 +189,8 @@ function DataTable({
                 options={entries}
                 onChange={(event, newValue) => {
                   setEntriesPerPage(parseInt(newValue, 10));
+                  // Fixed: Go back to first page after changing entries per page
+                  safeGotoPage(0);
                 }}
                 size="small"
                 sx={{ width: "5rem" }}
@@ -167,15 +201,32 @@ function DataTable({
               </MDTypography>
             </MDBox>
           )}
+
           {canSearch && (
-            <MDBox width="12rem" ml="auto">
+            <MDBox
+              width={isSmallScreen ? "100%" : "16rem"}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "start",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
+              <MDTypography
+                variant="caption"
+                color="dark"
+                sx={{ fontSize: "14px", fontWeight: 500 }}
+              >
+                Search
+              </MDTypography>
               <MDInput
                 placeholder="Search..."
                 value={search}
                 size="small"
                 fullWidth
                 onChange={({ currentTarget }) => {
-                  setSearch(search);
+                  setSearch(currentTarget.value);
                   onSearchChange(currentTarget.value);
                 }}
               />
@@ -249,9 +300,14 @@ function DataTable({
             {renderPagination.length > 6 ? (
               <MDBox width="5rem" mx={1}>
                 <MDInput
-                  inputProps={{ type: "number", min: 1, max: customizedPageOptions.length }}
-                  value={customizedPageOptions[pageIndex]}
-                  onChange={(handleInputPagination, handleInputPaginationValue)}
+                  inputProps={{
+                    type: "number",
+                    min: 1,
+                    max: customizedPageOptions.length,
+                    defaultValue: pageIndex + 1,
+                  }}
+                  value={pageIndex + 1}
+                  onChange={handleInputPagination}
                 />
               </MDBox>
             ) : (
@@ -271,7 +327,7 @@ function DataTable({
 
 // Setting default values for the props of DataTable
 DataTable.defaultProps = {
-  entriesPerPage: { defaultValue: 10, entries: [5, 10, 15, 20, 25] },
+  entriesPerPage: { defaultValue: 5, entries: [5, 10, 15, 20, 25] },
   canSearch: false,
   showTotalEntries: true,
   pagination: { variant: "gradient", color: "info" },

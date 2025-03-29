@@ -42,6 +42,7 @@ import themeDarkRTL from "assets/theme-dark/theme-rtl";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
+import AddUsers from "layouts/AddUsersPage/AddUsers";
 
 // Material Dashboard 2 React routes
 import routes from "routes";
@@ -191,6 +192,8 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
+        <Route path="/add-users" element={<AddUsers />} />
+
         <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </ThemeProvider>

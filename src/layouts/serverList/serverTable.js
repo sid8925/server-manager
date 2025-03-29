@@ -51,123 +51,184 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "45%", align: "left" },
-      { Header: "function", accessor: "function", align: "left" },
-      { Header: "status", accessor: "status", align: "center" },
-      { Header: "employed", accessor: "employed", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
+      {
+        Header: "author",
+        accessor: "author",
+        width: "45%",
+        align: "left",
+        Cell: ({ row }) => row.original.authorComponent,
+      },
+      {
+        Header: "function",
+        accessor: "function",
+        align: "left",
+        Cell: ({ row }) => row.original.functionComponent,
+      },
+      {
+        Header: "status",
+        accessor: "status",
+        align: "center",
+        Cell: ({ row }) => row.original.statusComponent,
+      },
+      {
+        Header: "employed",
+        accessor: "employed",
+        align: "center",
+        Cell: ({ row }) => row.original.employedComponent,
+      },
+      {
+        Header: "action",
+        accessor: "action",
+        align: "center",
+        Cell: ({ row }) => row.original.actionComponent,
+      },
     ],
 
     rows: [
       {
-        author: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
-        function: <Job title="Manager" description="Organization" />,
-        status: (
+        author: "Alexa Liras", // Raw text for search
+        authorComponent: <Author image={team3} name="Alexa Liras" />, // UI component
+        function: "Manager",
+        functionComponent: <Job title="Manager" description="Organization" />,
+        status: "online",
+        statusComponent: (
           <MDBox ml={-1}>
             <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
-        employed: (
+        employed: "23/04/18",
+        employedComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             23/04/18
           </MDTypography>
         ),
-        action: (
+        action: "Edit",
+        actionComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             Edit
           </MDTypography>
         ),
       },
       {
-        author: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
-        function: <Job title="Programator" description="Developer" />,
-        status: (
+        author: "John Michael",
+        authorComponent: <Author image={team2} name="John Michael" />,
+        function: "Programator",
+        functionComponent: <Job title="Programator" description="Developer" />,
+
+        status: "offline",
+        statusComponent: (
           <MDBox ml={-1}>
             <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
           </MDBox>
         ),
-        employed: (
+        employed: "11/01/19",
+        employedComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             11/01/19
           </MDTypography>
         ),
-        action: (
+        action: "Edit",
+        actionComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             Edit
           </MDTypography>
         ),
       },
       {
-        author: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" />,
-        function: <Job title="Executive" description="Projects" />,
-        status: (
+        author: "Laurent Perrier",
+        authorComponent: <Author image={team4} name="Laurent Perrier" />,
+        function: "Executive",
+        functionComponent: <Job title="Executive" description="Projects" />,
+        status: "online",
+        statusComponent: (
           <MDBox ml={-1}>
             <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
-        employed: (
+        employed: "19/09/17",
+
+        employedComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             19/09/17
           </MDTypography>
         ),
-        action: (
+        action: "Edit",
+        actionComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             Edit
           </MDTypography>
         ),
       },
       {
-        author: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" />,
-        function: <Job title="Programator" description="Developer" />,
-        status: (
+        author: "Michael Levi",
+        authorComponent: <Author image={team3} name="Michael Levi" />,
+        function: "Programator",
+        functionComponent: <Job title="Programator" description="Developer" />,
+        status: "online",
+        statusComponent: (
           <MDBox ml={-1}>
             <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
           </MDBox>
         ),
-        employed: (
+        employed: "24/12/08",
+
+        employedComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             24/12/08
           </MDTypography>
         ),
-        action: (
+        action: "Edit",
+        actionComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             Edit
           </MDTypography>
         ),
       },
       {
-        author: <Author image={team3} name="Richard Gran" email="richard@creative-tim.com" />,
-        function: <Job title="Manager" description="Executive" />,
-        status: (
+        author: "Richard Gran",
+        authorComponent: <Author image={team3} name="Richard Gran" />,
+        function: "Manager",
+        functionComponent: <Job title="Manager" description="Executive" />,
+        status: "offline",
+        statusComponent: (
           <MDBox ml={-1}>
             <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
           </MDBox>
         ),
-        employed: (
+        employed: "04/10/21",
+
+        employedComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             04/10/21
           </MDTypography>
         ),
-        action: (
+        action: "Edit",
+        actionComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             Edit
           </MDTypography>
         ),
       },
       {
-        author: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
-        function: <Job title="Programator" description="Developer" />,
-        status: (
+        author: "Miriam Eric",
+        authorComponent: <Author image={team4} name="Miriam Eric" />,
+        function: "Programator",
+        functionComponent: <Job title="Programator" description="Developer" />,
+        status: "offline",
+        statusComponent: (
           <MDBox ml={-1}>
             <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
           </MDBox>
         ),
-        employed: (
+        employed: "14/09/20",
+
+        employedComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             14/09/20
           </MDTypography>
         ),
-        action: (
+        action: "Edit",
+        actionComponent: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
             Edit
           </MDTypography>

@@ -20,6 +20,8 @@ import PropTypes from "prop-types";
 import MDBox from "components/MDBox";
 
 function DataTableBodyCell({ noBorder, align, children }) {
+  // console.log("children", children);
+
   return (
     <MDBox
       component="td"
