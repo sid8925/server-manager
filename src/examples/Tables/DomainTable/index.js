@@ -37,8 +37,10 @@ import MDInput from "components/MDInput";
 import MDPagination from "components/MDPagination";
 
 // Material Dashboard 2 React example components
-import NewUserDataTableBodyCell from "examples/Tables/NewUserDataTable/NewUserDataTableBodyCell";
-import NewUserDataTableHeadCell from "examples/Tables/NewUserDataTable/NewUserDataTableHeadCell";
+import DataTableHeadCell from "examples/Tables/DataTable/DataTableHeadCell";
+import DataTableBodyCell from "examples/Tables/DataTable/DataTableBodyCell";
+import DomainDataTableHeadCell from "examples/Tables/DomainTable/DomainDataTableHeadCell";
+import DomainDataTableBodyCell from "examples/Tables/DomainTable/DomainDataTableBodyCell";
 
 function DataTable({
   entriesPerPage,
@@ -214,7 +216,7 @@ function DataTable({
           {headerGroups.map((headerGroup, key) => (
             <TableRow key={key} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, idx) => (
-                <NewUserDataTableHeadCell
+                <DomainDataTableHeadCell
                   key={idx}
                   {...column.getHeaderProps(isSorted && column.getSortByToggleProps())}
                   width={column.width ? column.width : "auto"}
@@ -222,7 +224,7 @@ function DataTable({
                   sorted={setSortedValue(column)}
                 >
                   {column.render("Header")}
-                </NewUserDataTableHeadCell>
+                </DomainDataTableHeadCell>
               ))}
             </TableRow>
           ))}
@@ -233,14 +235,14 @@ function DataTable({
             return (
               <TableRow key={key} {...row.getRowProps()}>
                 {row.cells.map((cell, idx) => (
-                  <NewUserDataTableBodyCell
+                  <DomainDataTableBodyCell
                     key={idx}
                     noBorder={noEndBorder && rows.length - 1 === key}
                     align={cell.column.align ? cell.column.align : "left"}
                     {...cell.getCellProps()}
                   >
                     {cell.render("Cell")}
-                  </NewUserDataTableBodyCell>
+                  </DomainDataTableBodyCell>
                 ))}
               </TableRow>
             );

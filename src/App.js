@@ -53,6 +53,7 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
+import Cover from "layouts/authentication/reset-password/cover";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -123,29 +124,29 @@ export default function App() {
       return null;
     });
 
-  const configsButton = (
-    <MDBox
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      width="3.25rem"
-      height="3.25rem"
-      bgColor="white"
-      shadow="sm"
-      borderRadius="50%"
-      position="fixed"
-      right="2rem"
-      bottom="2rem"
-      zIndex={99}
-      color="dark"
-      sx={{ cursor: "pointer" }}
-      onClick={handleConfiguratorOpen}
-    >
-      <Icon fontSize="small" color="inherit">
-        settings
-      </Icon>
-    </MDBox>
-  );
+  // const configsButton = (
+  //   // <MDBox
+  //   //   display="flex"
+  //   //   justifyContent="center"
+  //   //   alignItems="center"
+  //   //   width="3.25rem"
+  //   //   height="3.25rem"
+  //   //   bgColor="white"
+  //   //   shadow="sm"
+  //   //   borderRadius="50%"
+  //   //   position="fixed"
+  //   //   right="2rem"
+  //   //   bottom="2rem"
+  //   //   zIndex={99}
+  //   //   color="dark"
+  //   //   sx={{ cursor: "pointer" }}
+  //   //   onClick={handleConfiguratorOpen}
+  //   // >
+  //   //   <Icon fontSize="small" color="inherit">
+  //   //     settings
+  //   //   </Icon>
+  //   // </MDBox>
+  // );
 
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>
@@ -156,13 +157,13 @@ export default function App() {
             <Sidenav
               color={sidenavColor}
               brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="Material Dashboard 2"
+              brandName="Server Manager"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
             />
             <Configurator />
-            {configsButton}
+            {/* {configsButton} */}
           </>
         )}
         {layout === "vr" && <Configurator />}
@@ -180,19 +181,20 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Material Dashboard 2"
+            brandName="Server Manager"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
           />
           <Configurator />
-          {configsButton}
+          {/* {configsButton} */}
         </>
       )}
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
         <Route path="/add-users" element={<AddUsers />} />
+        <Route path="/reset-password" element={<Cover />} />
         <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </ThemeProvider>

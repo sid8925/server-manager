@@ -24,7 +24,7 @@
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Domain from "layouts/domain";
-import NewUserList from "layouts/NewUserList";
+import UsersList from "layouts/UserList";
 import ServerList from "layouts/serverList";
 import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
@@ -49,10 +49,10 @@ const routes = [
   {
     type: "collapse",
     name: "User List",
-    key: "newUserListTable",
+    key: "userListTable",
     icon: <Icon fontSize="small">people</Icon>,
     route: "/user-list",
-    component: <NewUserList />,
+    component: <UsersList />,
   },
 
   {

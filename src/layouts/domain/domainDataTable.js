@@ -39,6 +39,15 @@ export default function data() {
       </MDBox>
     </MDBox>
   );
+  const Domain = ({ name }) => (
+    <MDBox display="flex" alignItems="center" lineHeight={1}>
+      <MDBox ml={2} lineHeight={1}>
+        <MDTypography display="block" variant="button" fontWeight="medium">
+          {name}
+        </MDTypography>
+      </MDBox>
+    </MDBox>
+  );
 
   const Job = ({ title, description }) => (
     <MDBox lineHeight={1} textAlign="left">
@@ -57,6 +66,13 @@ export default function data() {
         width: "45%",
         align: "left",
         Cell: ({ row }) => row.original.authorComponent,
+      },
+      {
+        Header: "domain no.",
+        accessor: "domain",
+        width: "45%",
+        align: "left",
+        Cell: ({ row }) => row.original.domainComponent,
       },
       {
         Header: "function",
@@ -88,6 +104,8 @@ export default function data() {
       {
         author: "John Michael", // Raw text for search
         authorComponent: <Author image={team2} name="John Michael" />, // UI component
+        domain: "domain no. 1",
+        domainComponent: <Domain name="domain no. 1" />,
         function: "Manager",
         functionComponent: <Job title="Manager" description="Organization" />,
         status: "online",
@@ -112,6 +130,8 @@ export default function data() {
       {
         author: "Alexa Liras",
         authorComponent: <Author image={team3} name="Alexa Liras" />,
+        domain: "domain no. 2",
+        domainComponent: <Domain name="domain no. 2" />,
         function: "Programator",
         functionComponent: <Job title="Programator" description="Developer" />,
 
@@ -137,6 +157,8 @@ export default function data() {
       {
         author: "Laurent Perrier",
         authorComponent: <Author image={team4} name="Laurent Perrier" />,
+        domain: "domain no. 3",
+        domainComponent: <Domain name="domain no. 3" />,
         function: "Executive",
         functionComponent: <Job title="Executive" description="Projects" />,
         status: "online",
@@ -162,6 +184,8 @@ export default function data() {
       {
         author: "Michael Levi",
         authorComponent: <Author image={team3} name="Michael Levi" />,
+        domain: "domain no. 4",
+        domainComponent: <Domain name="domain no. 4" />,
         function: "Programator",
         functionComponent: <Job title="Programator" description="Developer" />,
         status: "online",
@@ -187,6 +211,8 @@ export default function data() {
       {
         author: "Richard Gran",
         authorComponent: <Author image={team3} name="Richard Gran" />,
+        domain: "domain no. 5",
+        domainComponent: <Domain name="domain no. 5" />,
         function: "Manager",
         functionComponent: <Job title="Manager" description="Executive" />,
         status: "offline",
@@ -212,6 +238,8 @@ export default function data() {
       {
         author: "Miriam Eric",
         authorComponent: <Author image={team4} name="Miriam Eric" />,
+        domain: "domain no. 6",
+        domainComponent: <Domain name="domain no. 6" />,
         function: "Programator",
         functionComponent: <Job title="Programator" description="Developer" />,
         status: "offline",

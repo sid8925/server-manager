@@ -20,6 +20,9 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
+// Toastify
+import { toast } from "react-toastify";
+
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState("");
@@ -56,10 +59,10 @@ function Basic() {
   };
 
   const handleSubmit = () => {
-    if (isError) {
-      alert("Email or Password is invalid");
-    } else if (!email || !password) {
-      alert("Please Fill The Form");
+    if (!email || !password) {
+      toast.warn("Enter both email and password.");
+    } else if (isError) {
+      toast.error("Invalid email or password.");
     } else {
       navigate("/");
     }
@@ -79,7 +82,7 @@ function Basic() {
           mb={1}
           textAlign="center"
         >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
+          <MDTypography variant="h4" fontWeight="medium" color="white">
             Sign in
           </MDTypography>
         </MDBox>
@@ -122,8 +125,22 @@ function Basic() {
                 &nbsp;&nbsp;Remember me
               </MDTypography>
             </MDBox>
+            <MDTypography
+              variant="button"
+              fontWeight="regular"
+              color="text"
+              sx={{ cursor: "pointer", userSelect: "none", ml: -1, fontSize: "13px" }}
+            >
+              Forget Password? <Link to="/reset-password">Click Here</Link>
+            </MDTypography>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth onClick={handleSubmit}>
+              <MDButton
+                variant="gradient"
+                color="info"
+                fullWidth
+                sx={{ textTransform: "capitalize", fontSize: "16px" }}
+                onClick={handleSubmit}
+              >
                 sign in
               </MDButton>
             </MDBox>

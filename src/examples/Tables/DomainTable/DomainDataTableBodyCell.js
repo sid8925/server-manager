@@ -19,7 +19,7 @@ import PropTypes from "prop-types";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 
-function NewUserDataTableBodyCell({ noBorder, align, children }) {
+function DomainDataTableBodyCell({ noBorder, align, children }) {
   // console.log("children", children);
 
   return (
@@ -45,17 +45,17 @@ function NewUserDataTableBodyCell({ noBorder, align, children }) {
   );
 }
 
-// Setting default values for the props of NewUserDataTableBodyCell
-NewUserDataTableBodyCell.defaultProps = {
+// Setting default values for the props of DomainDataTableBodyCell
+DomainDataTableBodyCell.defaultProps = {
   noBorder: false,
   align: "left",
 };
 
-// Typechecking props for the NewUserDataTableBodyCell
-NewUserDataTableBodyCell.propTypes = {
+// Typechecking props for the DomainDataTableBodyCell
+DomainDataTableBodyCell.propTypes = {
   children: PropTypes.node.isRequired,
   noBorder: PropTypes.bool,
   align: PropTypes.oneOf(["left", "right", "center"]),
 };
 
-export default NewUserDataTableBodyCell;
+export default DomainDataTableBodyCell;

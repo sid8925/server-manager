@@ -18,16 +18,16 @@ import MDTypography from "components/MDTypography";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import DataTable from "examples/Tables/DataTable";
+import DomainDataTable from "examples/Tables/DomainTable";
 
 // Data
-import dataTable from "layouts/domain/dataTable";
+import domainDataTable from "layouts/domain/domainDataTable";
 import MDButton from "components/MDButton";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useState } from "react";
 
 function Tables() {
-  const { columns, rows } = dataTable();
+  const { columns, rows } = domainDataTable();
 
   const [onAddDomainOpen, setOnAddDomainOpen] = useState(false);
   const [onEditDomainOpen, setOnEditDomainOpen] = useState(false);
@@ -61,7 +61,6 @@ function Tables() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-
       <MDBox
         mt={4}
         pt={0}
@@ -102,7 +101,7 @@ function Tables() {
             </MDTypography>
           </MDBox>
           <MDBox pt={3}>
-            <DataTable
+            <DomainDataTable
               table={{
                 columns,
                 rows: rows.map((row) => ({

@@ -28,17 +28,16 @@ import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 
 export default function data() {
-  // const Author = ({ image, name, email }) => (
-  //   <MDBox display="flex" alignItems="center" lineHeight={1}>
-  //     <MDAvatar src={image} name={name} size="sm" />
-  //     <MDBox ml={2} lineHeight={1}>
-  //       <MDTypography display="block" variant="button" fontWeight="medium">
-  //         {name}
-  //       </MDTypography>
-  //       <MDTypography variant="caption">{email}</MDTypography>
-  //     </MDBox>
-  //   </MDBox>
-  // );
+  const Author = ({ image, name }) => (
+    <MDBox display="flex" alignItems="center" lineHeight={1}>
+      <MDAvatar src={image} name={name} size="sm" />
+      <MDBox ml={2} lineHeight={1}>
+        <MDTypography display="block" variant="button" fontWeight="medium">
+          {name}
+        </MDTypography>
+      </MDBox>
+    </MDBox>
+  );
   const FirstName = ({ name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDBox ml={2} lineHeight={1}>
@@ -48,7 +47,7 @@ export default function data() {
       </MDBox>
     </MDBox>
   );
-  const LastName = ({ name }) => (
+  const Domain = ({ name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDBox ml={2} lineHeight={1}>
         <MDTypography display="block" variant="button" fontWeight="medium">
@@ -77,18 +76,18 @@ export default function data() {
       //   Cell: ({ row }) => row.original.authorComponent,
       // },
       {
-        Header: "first name",
-        accessor: "fName",
+        Header: "First Name",
+        accessor: "fname",
         width: "45%",
         align: "left",
-        Cell: ({ row }) => row.original.fNameComponent,
+        Cell: ({ row }) => row.original.fnameComponent,
       },
       {
-        Header: "last name",
-        accessor: "lName",
+        Header: "domain no.",
+        accessor: "domain",
         width: "45%",
         align: "left",
-        Cell: ({ row }) => row.original.lNameComponent,
+        Cell: ({ row }) => row.original.domainComponent,
       },
       {
         Header: "function",
@@ -119,11 +118,11 @@ export default function data() {
     rows: [
       {
         // author: "John Michael", // Raw text for search
-        // authorComponent: <Author image={team2} name="John Michael" />,
-        fName: "John",
-        fNameComponent: <FirstName name="John" />,
-        lName: "Michael",
-        lNameComponent: <LastName name="Michael" />,
+        // authorComponent: <Author image={team2} name="John Michael" />, // UI component
+        fname: "John",
+        fnameComponent: <FirstName name="John" />,
+        domain: "domain no. 1",
+        domainComponent: <Domain name="domain no. 1" />,
         function: "Manager",
         functionComponent: <Job title="Manager" description="Organization" />,
         status: "online",
@@ -148,10 +147,10 @@ export default function data() {
       {
         // author: "Alexa Liras",
         // authorComponent: <Author image={team3} name="Alexa Liras" />,
-        fName: "Alexa",
-        fNameComponent: <FirstName name="Alexa" />,
-        lName: "Liras",
-        lNameComponent: <LastName name="Liras" />,
+        fname: "Alexa",
+        fnameComponent: <FirstName name="Alexa" />,
+        domain: "domain no. 2",
+        domainComponent: <Domain name="domain no. 2" />,
         function: "Programator",
         functionComponent: <Job title="Programator" description="Developer" />,
 
@@ -177,11 +176,10 @@ export default function data() {
       {
         // author: "Laurent Perrier",
         // authorComponent: <Author image={team4} name="Laurent Perrier" />,
-
-        fName: "Laurent",
-        fNameComponent: <FirstName name="Laurent" />,
-        lName: "Liras",
-        lNameComponent: <LastName name="Liras" />,
+        fname: "Laurent",
+        fnameComponent: <FirstName name="Laurent" />,
+        domain: "domain no. 3",
+        domainComponent: <Domain name="domain no. 3" />,
         function: "Executive",
         functionComponent: <Job title="Executive" description="Projects" />,
         status: "online",
@@ -207,10 +205,10 @@ export default function data() {
       {
         // author: "Michael Levi",
         // authorComponent: <Author image={team3} name="Michael Levi" />,
-        fName: "Michael",
-        fNameComponent: <FirstName name="Michael" />,
-        lName: "Levi",
-        lNameComponent: <LastName name="Levi" />,
+        fname: "Michael",
+        fnameComponent: <FirstName name="Michael" />,
+        domain: "domain no. 4",
+        domainComponent: <Domain name="domain no. 4" />,
         function: "Programator",
         functionComponent: <Job title="Programator" description="Developer" />,
         status: "online",
@@ -236,10 +234,10 @@ export default function data() {
       {
         // author: "Richard Gran",
         // authorComponent: <Author image={team3} name="Richard Gran" />,
-        fName: "Richard",
-        fNameComponent: <FirstName name="Richard" />,
-        lName: "Gran",
-        lNameComponent: <LastName name="Gran" />,
+        fname: "Richard",
+        fnameComponent: <FirstName name="Richard" />,
+        domain: "domain no. 5",
+        domainComponent: <Domain name="domain no. 5" />,
         function: "Manager",
         functionComponent: <Job title="Manager" description="Executive" />,
         status: "offline",
@@ -265,10 +263,10 @@ export default function data() {
       {
         // author: "Miriam Eric",
         // authorComponent: <Author image={team4} name="Miriam Eric" />,
-        fName: "Miriam",
-        fNameComponent: <FirstName name="Miriam" />,
-        lName: "Eric",
-        lNameComponent: <LastName name="Eric" />,
+        fname: "Miriam",
+        fnameComponent: <FirstName name="Miriam" />,
+        domain: "domain no. 6",
+        domainComponent: <Domain name="domain no. 6" />,
         function: "Programator",
         functionComponent: <Job title="Programator" description="Developer" />,
         status: "offline",

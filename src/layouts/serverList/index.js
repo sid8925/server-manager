@@ -19,7 +19,8 @@ import MDTypography from "components/MDTypography";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import DataTable from "examples/Tables/DataTable";
+// import DataTable from "examples/Tables/DataTable";
+import ServerTable from "examples/Tables/ServerTable";
 
 // Data
 import serverTable from "layouts/serverList/serverTable";
@@ -99,7 +100,7 @@ function Tables() {
             </MDTypography>
           </MDBox>
           <MDBox pt={3}>
-            <DataTable
+            <ServerTable
               table={{
                 columns,
                 rows: rows.map((row) => ({

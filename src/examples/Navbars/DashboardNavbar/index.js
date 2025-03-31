@@ -52,9 +52,12 @@ import {
   setMiniSidenav,
   setOpenConfigurator,
 } from "context";
+import MDButton from "components/MDButton";
+import { Tooltip } from "@mui/material";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
   const [openMenu, setOpenMenu] = useState(false);
@@ -90,6 +93,20 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
+
+  const style = {
+    backgroundColor: "#4D9EF0",
+    color: "#ffffff",
+    "&:hover": {
+      backgroundColor: "#3A7EC1", // Hover pe dark blue ho jayega
+    },
+    "&:active": {
+      backgroundColor: "#3A7EC1", // Click hone pe aur dark ho jayega
+    },
+    "&:focus": {
+      backgroundColor: "#3A7EC1", // Click hone pe aur dark ho jayega
+    },
+  };
 
   // Render the notifications menu
   const renderMenu = () => (
@@ -177,6 +194,34 @@ function DashboardNavbar({ absolute, light, isMini }) {
               >
                 <Icon sx={iconsStyle}>notifications</Icon>
               </IconButton>
+              <MDBox sx={{ display: { xs: "inline-block", md: "none" } }}>
+                {!isLoggedIn ? (
+                  <Tooltip title="Login">
+                    <IconButton size="small" disableRipple color="inherit" sx={navbarIconButton}>
+                      <Icon sx={iconsStyle} fontSize="medium">
+                        login
+                      </Icon>
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Tooltip title="Logout">
+                    <IconButton size="small" disableRipple color="inherit" sx={navbarIconButton}>
+                      <Icon sx={iconsStyle} fontSize="medium">
+                        logout
+                      </Icon>
+                    </IconButton>
+                  </Tooltip>
+                )}
+              </MDBox>
+
+              <MDBox sx={{ display: { xs: "none", md: "inline-block" } }}>
+                {!isLoggedIn ? (
+                  <MDButton sx={style}>Login</MDButton>
+                ) : (
+                  <MDButton sx={style}>Logout</MDButton>
+                )}
+              </MDBox>
+
               {renderMenu()}
             </MDBox>
           </MDBox>

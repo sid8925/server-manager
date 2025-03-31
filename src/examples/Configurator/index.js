@@ -162,7 +162,7 @@ function Configurator() {
       <Divider />
 
       <MDBox pt={0.5} pb={3} px={3}>
-        <MDBox>
+        {/* <MDBox>
           <MDTypography variant="h6">Sidenav Colors</MDTypography>
 
           <MDBox mb={0.5}>
@@ -206,9 +206,9 @@ function Configurator() {
               />
             ))}
           </MDBox>
-        </MDBox>
+        </MDBox> */}
 
-        <MDBox mt={3} lineHeight={1}>
+        <MDBox lineHeight={1}>
           <MDTypography variant="h6">Sidenav Type</MDTypography>
           <MDTypography variant="button" color="text">
             Choose between different sidenav types.
