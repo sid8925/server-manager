@@ -193,7 +193,6 @@ export default function App() {
       <Routes>
         {getRoutes(routes)}
         <Route path="/add-users" element={<AddUsers />} />
-
         <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </ThemeProvider>

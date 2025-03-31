@@ -1,19 +1,15 @@
 // @mui material components
-import React, { useState } from "react";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+import React from "react";
+import Card from "@mui/material/Card";
 import {
-  Card,
-  Button,
   Dialog,
-  DialogActions,
-  DialogContent,
   DialogTitle,
+  DialogContent,
+  DialogActions,
   TextField,
+  Button,
   FormLabel,
 } from "@mui/material";
-
-// React Router
-import { useNavigate } from "react-router-dom";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -22,34 +18,50 @@ import MDTypography from "components/MDTypography";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import DataTable from "examples/Tables/DataTable";
+// import DataTable from "examples/Tables/DataTable";
+import NewUserDataTable from "examples/Tables/NewUserDataTable";
 
 // Data
-import userTable from "layouts/userList/userTable";
-
+// import dataTable from "layouts/domain/dataTable";
+import newUserDataTable from "layouts/NewUserList/newUserDataTable";
 import MDButton from "components/MDButton";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 function Tables() {
-  const { columns, rows } = userTable();
+  const { columns, rows } = newUserDataTable();
   const navigate = useNavigate();
 
-  const [onEditUserOpen, setOnEditUserOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [onAddDomainOpen, setOnAddDomainOpen] = useState(false);
+  const [onEditDomainOpen, setOnEditDomainOpen] = useState(false);
+  const [selectedDomain, setSelectedDomain] = useState(null);
 
-  const handleAddUser = () => {
-    navigate("/add-users");
+  const handleOpen = () => {
+    setOnAddDomainOpen(true);
   };
 
-  const handleEditUserOpen = (User) => {
-    setSelectedUser(User);
-    setOnEditUserOpen(true);
-    console.log("data", User);
+  const handleClose = () => {
+    setOnAddDomainOpen(false);
   };
 
-  const handleEditUserClose = () => {
-    setOnEditUserOpen(false);
-    setSelectedUser(null);
+  const handleAddDomain = () => {
+    handleOpen();
   };
+
+  const handleEditDomainOpen = (domain) => {
+    setSelectedDomain(domain);
+    setOnEditDomainOpen(true);
+    console.log("data", domain);
+  };
+
+  const handleEditDomainClose = () => {
+    setOnEditDomainOpen(false);
+    setSelectedDomain(null);
+  };
+
+  // console.log("rows", rows);
 
   return (
     <DashboardLayout>
@@ -71,11 +83,14 @@ function Tables() {
           color="white"
           fullWidth
           style={{ fontSize: "18px", textTransform: "none" }}
-          onClick={handleAddUser}
+          onClick={() => {
+            navigate("/add-users");
+          }}
         >
-          <AddCircleIcon sx={{ width: 20, height: 20 }} /> &nbsp; Add User
+          <AddCircleIcon sx={{ width: 20, height: 20 }} /> &nbsp; Add Users
         </MDButton>
       </MDBox>
+
       <MDBox pt={0} pb={3}>
         <MDBox pt={0} pb={6} sx={{ width: "50%" }}></MDBox>
         <Card>
@@ -90,17 +105,17 @@ function Tables() {
             coloredShadow="info"
           >
             <MDTypography variant="h6" color="white">
-              User List
+              Users List
             </MDTypography>
           </MDBox>
           <MDBox pt={3}>
-            <DataTable
+            <NewUserDataTable
               table={{
                 columns,
                 rows: rows.map((row) => ({
                   ...row,
                   actionComponent: (
-                    <MDButton variant="text" color="dark" onClick={() => handleEditUserOpen(row)}>
+                    <MDButton variant="text" color="dark" onClick={() => handleEditDomainOpen(row)}>
                       Edit
                     </MDButton>
                   ),
@@ -114,29 +129,18 @@ function Tables() {
           </MDBox>
         </Card>
       </MDBox>
-      <Dialog open={onEditUserOpen} fullWidth keepMounted onClose={handleEditUserClose}>
-        <DialogTitle>Edit User</DialogTitle>
+
+      <Dialog open={onEditDomainOpen} fullWidth keepMounted onClose={handleEditDomainClose}>
+        <DialogTitle>Edit Domain</DialogTitle>
         <DialogContent>
           <MDBox sx={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
             <div>
-              <FormLabel sx={{ fontSize: "16px" }}>First Name</FormLabel>
+              <FormLabel sx={{ fontSize: "16px" }}>Author</FormLabel>
               <TextField
                 variant="outlined"
                 fullWidth
-                value={selectedUser?.fName}
-                defaultValue={selectedUser?.fName}
-                InputProps={{
-                  sx: { fontSize: "14px" },
-                }}
-              />
-            </div>
-            <div>
-              <FormLabel sx={{ fontSize: "16px" }}>Last Name</FormLabel>
-              <TextField
-                variant="outlined"
-                fullWidth
-                value={selectedUser?.lName}
-                defaultValue={selectedUser?.lName}
+                value={selectedDomain?.author}
+                defaultValue={selectedDomain?.author}
                 InputProps={{
                   sx: { fontSize: "14px" },
                 }}
@@ -144,40 +148,31 @@ function Tables() {
             </div>
 
             <div>
-              <FormLabel sx={{ fontSize: "16px" }}>Email</FormLabel>
+              <FormLabel sx={{ fontSize: "16px" }}>Title</FormLabel>
               <TextField
                 variant="outlined"
                 fullWidth
-                value={selectedUser?.email}
-                defaultValue={selectedUser?.email}
+                value={selectedDomain?.functionComponent?.props?.title}
+                defaultValue={selectedDomain?.functionComponent?.props?.title}
               />
             </div>
             <div>
-              <FormLabel sx={{ fontSize: "16px" }}>Mobile No.</FormLabel>
+              <FormLabel sx={{ fontSize: "16px" }}>Description</FormLabel>
               <TextField
                 variant="outlined"
                 fullWidth
-                value={selectedUser?.mobile}
-                defaultValue={selectedUser?.mobile}
+                value={selectedDomain?.functionComponent?.props?.description}
+                defaultValue={selectedDomain?.functionComponent?.props?.description}
               />
             </div>
 
             <div>
-              <FormLabel sx={{ fontSize: "16px" }}>Address</FormLabel>
+              <FormLabel sx={{ fontSize: "16px" }}>Employed</FormLabel>
               <TextField
                 variant="outlined"
                 fullWidth
-                value={selectedUser?.address}
-                defaultValue={selectedUser?.address}
-              />
-            </div>
-            <div>
-              <FormLabel sx={{ fontSize: "16px" }}>Role</FormLabel>
-              <TextField
-                variant="outlined"
-                fullWidth
-                value={selectedUser?.role}
-                defaultValue={selectedUser?.role}
+                value={selectedDomain?.employed}
+                defaultValue={selectedDomain?.employed}
               />
             </div>
             <div>
@@ -185,15 +180,15 @@ function Tables() {
               <TextField
                 variant="outlined"
                 fullWidth
-                value={selectedUser?.status}
-                defaultValue={selectedUser?.status}
+                value={selectedDomain?.status}
+                defaultValue={selectedDomain?.status}
               />
             </div>
           </MDBox>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleEditUserClose}>Cancel</Button>
-          <Button onClick={handleEditUserClose}>Save</Button>
+          <Button onClick={handleEditDomainClose}>Cancel</Button>
+          <Button onClick={handleEditDomainClose}>Save</Button>
         </DialogActions>
       </Dialog>
     </DashboardLayout>
